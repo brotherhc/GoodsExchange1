@@ -1,0 +1,8 @@
+package com.fafukeji.V1;
+
+/**
+ * –Ë«Û
+ */
+public interface RequirementsDao{
+
+}

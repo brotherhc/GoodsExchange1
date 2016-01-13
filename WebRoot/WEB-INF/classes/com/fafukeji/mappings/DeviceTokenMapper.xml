@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fafukeji.dao.DeviceTokenMapper" >
+  <resultMap id="BaseResultMap" type="com.fafukeji.model.DeviceToken" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="device_token" property="deviceToken" jdbcType="VARCHAR" />
+    <result column="device_type" property="deviceType" jdbcType="TINYINT" />
+    <result column="del_flag" property="delFlag" jdbcType="TINYINT" />
+    <result column="updated_at" property="updatedAt" jdbcType="INTEGER" />
+    <result column="created_at" property="createdAt" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, device_token, device_type, del_flag, updated_at, created_at
+  </sql>
+  <select id="getByUserId" resultMap="BaseResultMap" parameterType="com.fafukeji.model.DeviceToken" >
+    select 
+    <include refid="Base_Column_List" />
+    from device_token
+    where user_id = #{userId,jdbcType=INTEGER} AND del_flag = #{DEL_FLAG_NORMAL}
+  </select>
+  <select id="getByDeviceToken" resultMap="BaseResultMap" parameterType="com.fafukeji.model.DeviceToken" >
+    select 
+    <include refid="Base_Column_List" />
+    from device_token
+    where device_token = #{deviceToken,jdbcType=INTEGER} AND del_flag = #{DEL_FLAG_NORMAL}
+  </select>
+  <insert id="insertSelective" parameterType="com.fafukeji.model.DeviceToken" >
+    insert into device_token
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId > 0" >
+        user_id,
+      </if>
+      <if test="deviceToken != null" >
+        device_token,
+      </if>
+      <if test="deviceType > 0" >
+        device_type,
+      </if>
+      <if test="updatedAt > 0" >
+        updated_at,
+      </if>
+      <if test="createdAt > 0" >
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId > 0" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceToken != null" >
+        #{deviceToken,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType > 0" >
+        #{deviceType,jdbcType=TINYINT},
+      </if>
+      <if test="updatedAt > 0" >
+        #{updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt > 0" >
+        #{createdAt,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+</mapper>

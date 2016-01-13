@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd  
+                        http://www.springframework.org/schema/context  
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd  
+                        http://www.springframework.org/schema/mvc  
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<context:property-placeholder
+		ignore-unresolvable="true" location="classpath:config.properties" />
+
+
+	<!-- 定时装置所要执行的任务所在的类 -->
+    <bean id="taskJob" class="com.fafukeji.schedule.TaskJob"/>
+
+    <!-- 引用任务描述 -->
+    <bean id="methodInvokingJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+       <property name="targetObject">
+
+           <!-- 引用任务方法所在的类 -->
+           <ref bean="taskJob" />
+       </property>
+       <property name="targetMethod">
+
+           <!-- 指定任务方法名称 -->
+           <value>sendTask</value>
+       </property>
+    </bean>
+
+    <!-- 配置触发器 -->
+    <bean id="taskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+       <!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+       <property name="jobDetail">
+
+           <!-- 引用任务描述bean -->
+           <ref bean="methodInvokingJobDetail" />
+       </property>
+
+       <!-- 每天的8点到21点每隔1分钟触发，具体说明见附录 -->
+       <property name="cronExpression">
+
+           <!-- 每隔30分钟执行一次 0 */30 * * * ?  -->
+           <value>0 */${scheduler_minutes} * * * ?</value>
+       </property>
+    </bean>
+
+    <!-- 配置任务工厂, 只能有一个这种bean -->
+    <bean id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+
+       <!-- 添加触发器 -->
+       <property name="triggers">
+           <list>
+              <ref local="taskTrigger" />
+              <!-- ... -->
+           </list>
+       </property>
+    </bean>
+
+</beans>

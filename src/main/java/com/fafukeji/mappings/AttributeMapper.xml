@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fafukeji.dao.AttributeMapper" >
+  <resultMap id="BaseResultMap" type="com.fafukeji.model.Attribute" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="SMALLINT" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="parent_name" property="parentName" jdbcType="INTEGER" />
+    <result column="attribute_type" property="attributeType" jdbcType="BIT" />
+    <result column="attribute_number" property="attributeNumber" jdbcType="BIT" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="updated_at" property="updatedAt" jdbcType="INTEGER" />
+    <result column="created_at" property="createdAt" jdbcType="INTEGER" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, category_id, name, level, parent_id, parent_name, attribute_type, attribute_number, 
+    status, updated_at, created_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from attribute
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from attribute
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fafukeji.model.Attribute" >
+    insert into attribute (id, category_id, name, 
+      level, parent_id, parent_name, 
+      attribute_type, attribute_number, status, 
+      updated_at, created_at)
+    values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{level,jdbcType=SMALLINT}, #{parentId,jdbcType=INTEGER}, #{parentName,jdbcType=INTEGER}, 
+      #{attributeType,jdbcType=BIT}, #{attributeNumber,jdbcType=BIT}, #{status,jdbcType=BIT}, 
+      #{updatedAt,jdbcType=INTEGER}, #{createdAt,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fafukeji.model.Attribute" >
+    insert into attribute
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="parentName != null" >
+        parent_name,
+      </if>
+      <if test="attributeType != null" >
+        attribute_type,
+      </if>
+      <if test="attributeNumber != null" >
+        attribute_number,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=SMALLINT},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="parentName != null" >
+        #{parentName,jdbcType=INTEGER},
+      </if>
+      <if test="attributeType != null" >
+        #{attributeType,jdbcType=BIT},
+      </if>
+      <if test="attributeNumber != null" >
+        #{attributeNumber,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fafukeji.model.Attribute" >
+    update attribute
+    <set >
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=SMALLINT},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="parentName != null" >
+        parent_name = #{parentName,jdbcType=INTEGER},
+      </if>
+      <if test="attributeType != null" >
+        attribute_type = #{attributeType,jdbcType=BIT},
+      </if>
+      <if test="attributeNumber != null" >
+        attribute_number = #{attributeNumber,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fafukeji.model.Attribute" >
+    update attribute
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      level = #{level,jdbcType=SMALLINT},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      parent_name = #{parentName,jdbcType=INTEGER},
+      attribute_type = #{attributeType,jdbcType=BIT},
+      attribute_number = #{attributeNumber,jdbcType=BIT},
+      status = #{status,jdbcType=BIT},
+      updated_at = #{updatedAt,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectbyparentid" parameterType="com.fafukeji.model.Attribute" resultMap="BaseResultMap">
+    select a.* from attribute as a join attribute as b on a.id = b.parent_id where b.parent_id =#{id}
+  </select>
+
+  <select id="selectCategoryByCategory_id" parameterType="Integer">
+    select a.category_id from attribute as a join Categories c on a.ategory_id = c.id where a.category_id=#{id}
+  </select>
+
+  <select id="list" resultMap="BaseResultMap">
+    select * from attribute
+  </select>
+  <select id="selectattribute" resultMap="BaseResultMap" parameterType="com.fafukeji.model.Attribute">
+      SELECT DISTINCT attribute.id,attribute.category_id,attribute.`name`,attribute.attribute_type,attribute.attribute_number,attribute.`status`,attribute.updated_at,attribute.created_at
+FROM attribute
+   </select>
+  <select id="selectid" resultMap="BaseResultMap" parameterType="com.fafukeji.model.Attribute">
+         SELECT DISTINCT attribute.id,attribute.category_id,attribute.`name`,attribute.attribute_type,attribute.attribute_number,attribute.`status`,attribute.updated_at,attribute.created_at
+FROM attribute WHERE attribute.id = #{id}
+  </select>
+</mapper>

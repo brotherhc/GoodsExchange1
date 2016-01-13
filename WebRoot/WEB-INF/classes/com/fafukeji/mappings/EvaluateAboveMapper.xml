@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fafukeji.dao.EvaluateAboveMapper" >
+  <resultMap id="BaseResultMap" type="com.fafukeji.model.EvaluateAbove" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="BIT" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="updated_at" property="updatedAt" jdbcType="INTEGER" />
+    <result column="created_at" property="createdAt" jdbcType="INTEGER" />
+    <association property="userId" javaType="com.fafukeji.model.User">
+      <id column="id" property="id" jdbcType="INTEGER" />
+      <result column="username" property="username" jdbcType="VARCHAR" />
+    </association>
+    <association property="evaluateId" javaType="com.fafukeji.model.Evaluate">
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, evaluate_id, content, state, status, updated_at, created_at
+  </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    update evaluate_above SET status = 1
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.fafukeji.model.EvaluateAbove" >
+    insert into evaluate_above
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="evaluateId != null" >
+        evaluate_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId.id,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateId != null" >
+        #{evaluateId.id,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fafukeji.model.EvaluateAbove" >
+    update evaluate_above
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId.id,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateId != null" >
+        evaluate_id = #{evaluateId.id,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectEvaluateAbove" resultMap="BaseResultMap" parameterType="com.fafukeji.model.EvaluateAbove">
+      SELECT e.id,u.username,e.goods_id, e.exchange_id, e.content, e.type, e.status, e.updated_at, e.created_at FROM evaluate e LEFT JOIN users u on e.user_id = u.id
+  </select>
+</mapper>

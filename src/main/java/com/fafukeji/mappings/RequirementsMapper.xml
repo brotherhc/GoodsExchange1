@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fafukeji.dao.RequirementsMapper" >
+  <resultMap id="BaseResultMap" type="com.fafukeji.model.Requirements" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="attributes" property="attributes" jdbcType="VARCHAR" />
+    <result column="pics" property="pics" jdbcType="VARCHAR" />
+    <result column="urls" property="urls" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="BIT" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="updated_at" property="updatedAt" jdbcType="INTEGER" />
+    <result column="created_at" property="createdAt" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, category_id, description, attributes, pics, urls, state, status, updated_at, 
+    created_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from requirements
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from requirements
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fafukeji.model.Requirements" >
+    insert into requirements (id, user_id, category_id, 
+      description, attributes, pics, 
+      urls, state, status, updated_at, 
+      created_at)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR}, #{attributes,jdbcType=VARCHAR}, #{pics,jdbcType=VARCHAR}, 
+      #{urls,jdbcType=VARCHAR}, #{state,jdbcType=BIT}, #{status,jdbcType=BIT}, #{updatedAt,jdbcType=INTEGER}, 
+      #{createdAt,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fafukeji.model.Requirements" >
+    insert into requirements
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="attributes != null" >
+        attributes,
+      </if>
+      <if test="pics != null" >
+        pics,
+      </if>
+      <if test="urls != null" >
+        urls,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="attributes != null" >
+        #{attributes,jdbcType=VARCHAR},
+      </if>
+      <if test="pics != null" >
+        #{pics,jdbcType=VARCHAR},
+      </if>
+      <if test="urls != null" >
+        #{urls,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fafukeji.model.Requirements" >
+    update requirements
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="attributes != null" >
+        attributes = #{attributes,jdbcType=VARCHAR},
+      </if>
+      <if test="pics != null" >
+        pics = #{pics,jdbcType=VARCHAR},
+      </if>
+      <if test="urls != null" >
+        urls = #{urls,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fafukeji.model.Requirements" >
+    update requirements
+    set user_id = #{userId,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      attributes = #{attributes,jdbcType=VARCHAR},
+      pics = #{pics,jdbcType=VARCHAR},
+      urls = #{urls,jdbcType=VARCHAR},
+      state = #{state,jdbcType=BIT},
+      status = #{status,jdbcType=BIT},
+      updated_at = #{updatedAt,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getAll" resultMap="BaseResultMap">
+    SELECT *FROM requirements
+  </select>
+  <select id="selectRequirements" resultMap="BaseResultMap" parameterType="com.fafukeji.model.Requirements">
+   SELECT DISTINCT requirements.id,requirements.user_id,requirements.category_id,requirements.description,requirements.attributes,requirements.pics,requirements.urls,requirements.state,requirements.`status`,requirements.updated_at,requirements.created_at
+  FROM requirements , users u WHERE requirements.user_id = u.id
+  </select>
+  <select id="selectid" resultMap="BaseResultMap" parameterType="com.fafukeji.model.Requirements">
+   SELECT DISTINCT requirements.id,requirements.user_id,requirements.category_id,requirements.description,requirements.attributes,requirements.pics,requirements.urls,requirements.state,requirements.`status`,requirements.updated_at,requirements.created_at
+  FROM requirements , users u WHERE requirements.user_id = #{id}
+  </select>
+</mapper>
