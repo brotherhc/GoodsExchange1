@@ -11,7 +11,7 @@
     <file url="file://$PROJECT_DIR$/src/main/java/com/fafukeji/V1/controller/InformProjectController.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/fafukeji/V1/controller/LoginProjectController.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/fafukeji/controller/AttributeController.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/fafukeji/controller/websocket" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/fafukeji/controller/websocket" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/fafukeji/model/Attribute.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/fafukeji/model/Goods.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/fafukeji/service/impl/AttributeServiceImpl.java" charset="UTF-8" />
